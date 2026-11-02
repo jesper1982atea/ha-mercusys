@@ -13,6 +13,8 @@ En custom integration som ger varje Mercusys Wi-Fi-extender en **Starta om**-kna
 
 När en ny GitHub-release publiceras visar HACS en uppdateringsentitet under **Inställningar → System → Uppdateringar**. Du kan installera den där. Home Assistant behöver startas om efter en koduppdatering.
 
+Varje push till `main` skapar automatiskt en ny patchversion, uppdaterar `manifest.json`, bygger `mercusys_extender.zip` med integrationsfilerna direkt i ZIP-rotens nivå och publicerar en GitHub-release. Pushen behöver därför inte innehålla en manuell versionändring. HACS hämtar ZIP-filen från releasen.
+
 För automatisk installation kan du skapa en automation med HACS-uppdateringsentiteten för just detta förråd. Kopiera entitetens faktiska ID från Home Assistant och ersätt exemplet nedan. Automationens klockslag väljer en tid när en omstart passar:
 
 ```yaml

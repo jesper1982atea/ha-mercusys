@@ -1,0 +1,66 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Bump patch version
+        id: version
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("custom_components/mercusys_extender/manifest.json")
+          manifest = json.loads(path.read_text())
+          parts = manifest["version"].split(".")
+          if len(parts) != 3 or not all(part.isdigit() for part in parts):
+              raise SystemExit(f"Expected a numeric semantic version, got {manifest['version']!r}")
+          parts[2] = str(int(parts[2]) + 1)
+          manifest["version"] = ".".join(parts)
+          path.write_text(json.dumps(manifest, indent=2) + "\n")
+          print(f"version={manifest['version']}")
+          PY
+          VERSION=$(python3 -c 'import json; print(json.load(open("custom_components/mercusys_extender/manifest.json"))["version"])')
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Commit version bump
+        id: commit
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add custom_components/mercusys_extender/manifest.json
+          git commit -m "Bump version to ${{ steps.version.outputs.version }}"
+          git push origin HEAD:main
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Build HACS release archive
+        run: |
+          cd custom_components/mercusys_extender
+          zip -r "$GITHUB_WORKSPACE/mercusys_extender.zip" . \
+            -x '*/__pycache__/*' '*.pyc' '.DS_Store'
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION='${{ steps.version.outputs.version }}'
+          gh release create "v$VERSION" "$GITHUB_WORKSPACE/mercusys_extender.zip" \
+            --target '${{ steps.commit.outputs.sha }}' \
+            --title "$VERSION" \
+            --notes "Automated release for push to main."
