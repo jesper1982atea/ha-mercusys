@@ -1,12 +1,14 @@
 {
   "domain": "mercusys_extender",
   "name": "Mercusys Extender",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "documentation": "https://github.com/jesper1982atea/ha-mercusys",
   "issue_tracker": "https://github.com/jesper1982atea/ha-mercusys/issues",
   "codeowners": [],
   "config_flow": true,
   "integration_type": "device",
   "iot_class": "local_polling",
-  "requirements": ["tplinkrouterc6u==5.38.0"]
+  "requirements": [
+    "tplinkrouterc6u==5.38.0"
+  ]
 }
