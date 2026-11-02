@@ -1,0 +1,43 @@
+{
+  "title": "Mercusys Extender",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Lägg till en Mercusys-extender",
+        "description": "Lägg till varje extender separat. Ange dess lokala IP-adress och lösenord till webbgränssnittet.",
+        "data": {
+          "host": "IP-adress eller URL",
+          "password": "Lösenord till webbgränssnittet",
+          "verify_ssl": "Verifiera HTTPS-certifikat"
+        }
+      }
+    },
+    "error": {
+      "invalid_host": "Ange en giltig IP-adress eller HTTP(S)-adress",
+      "cannot_connect": "Kunde inte ansluta. Kontrollera IP-adress och lösenord, eller se Home Assistants logg för detaljer."
+    },
+    "abort": {
+      "already_configured": "Denna extender är redan konfigurerad"
+    }
+  },
+  "entity": {
+    "button": {
+      "reboot": {"name": "Starta om"}
+    },
+    "sensor": {
+      "wireless_clients": {"name": "Trådlösa klienter"},
+      "main_wireless_clients": {"name": "Klienter på huvudnätet"},
+      "guest_wireless_clients": {"name": "Klienter på gästnätet"},
+      "wired_clients": {"name": "Trådbundna klienter"},
+      "wireless_clients_2g": {"name": "Klienter på 2,4 GHz"},
+      "wireless_clients_5g": {"name": "Klienter på 5 GHz"},
+      "wireless_clients_6g": {"name": "Klienter på 6 GHz"},
+      "wireless_clients_mlo": {"name": "MLO-klienter"},
+      "wan_connection_uptime": {"name": "WAN-anslutningens upptid"},
+      "cpu_usage": {"name": "Processoranvändning"},
+      "memory_usage": {"name": "Minnesanvändning"},
+      "last_status_update": {"name": "Senaste statusuppdatering"},
+      "last_reboot_requested": {"name": "Senaste omstartskommando"}
+    }
+  }
+}

@@ -1,3 +1,5 @@
 {
-  "name": "Mercusys Extender"
+  "name": "Mercusys Extender",
+  "zip_release": true,
+  "filename": "mercusys_extender.zip"
 }

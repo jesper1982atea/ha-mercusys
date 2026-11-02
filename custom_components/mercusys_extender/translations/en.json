@@ -1,0 +1,43 @@
+{
+  "title": "Mercusys Extender",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add a Mercusys extender",
+        "description": "Add each extender separately. Enter its local IP address and web interface password.",
+        "data": {
+          "host": "IP address or URL",
+          "password": "Web interface password",
+          "verify_ssl": "Verify HTTPS certificate"
+        }
+      }
+    },
+    "error": {
+      "invalid_host": "Enter a valid IP address or HTTP(S) URL",
+      "cannot_connect": "Could not connect. Check the IP address and password, or see the Home Assistant log for details."
+    },
+    "abort": {
+      "already_configured": "This extender is already configured"
+    }
+  },
+  "entity": {
+    "button": {
+      "reboot": {"name": "Reboot"}
+    },
+    "sensor": {
+      "wireless_clients": {"name": "Wireless clients"},
+      "main_wireless_clients": {"name": "Main wireless clients"},
+      "guest_wireless_clients": {"name": "Guest wireless clients"},
+      "wired_clients": {"name": "Wired clients"},
+      "wireless_clients_2g": {"name": "2.4 GHz clients"},
+      "wireless_clients_5g": {"name": "5 GHz clients"},
+      "wireless_clients_6g": {"name": "6 GHz clients"},
+      "wireless_clients_mlo": {"name": "MLO clients"},
+      "wan_connection_uptime": {"name": "WAN connection uptime"},
+      "cpu_usage": {"name": "CPU usage"},
+      "memory_usage": {"name": "Memory usage"},
+      "last_status_update": {"name": "Last status update"},
+      "last_reboot_requested": {"name": "Last reboot command"}
+    }
+  }
+}
